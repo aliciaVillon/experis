@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController; 
+import org.springframework.web.bind.annotation.RestController;
+
+import com.experis.ventaapp.rest.util.Message;
+import com.experis.ventaapp.rest.util.Response;
 import com.experis.ventaapp.service.dto.ClienteDTO;
 import com.experis.ventaapp.service.service.ClienteService; 
 import lombok.extern.slf4j.Slf4j; 

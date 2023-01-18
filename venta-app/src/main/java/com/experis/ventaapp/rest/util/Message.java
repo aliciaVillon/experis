@@ -1,4 +1,4 @@
-package com.experis.ventaapp.rest;
+package com.experis.ventaapp.rest.util;
 
 import lombok.Builder;
 import lombok.Data;

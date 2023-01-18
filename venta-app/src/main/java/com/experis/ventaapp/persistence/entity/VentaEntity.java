@@ -1,6 +1,9 @@
 package com.experis.ventaapp.persistence.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.Table; 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.experis.ventaapp.service.dto.ClienteDTO;
+import com.experis.ventaapp.service.dto.VentaDetalleDTO;
+
 import lombok.Data;
 
 @Data
@@ -16,7 +23,8 @@ import lombok.Data;
 @Table(name = "venta")
 public class VentaEntity implements Serializable{
 		  
-	private static final long serialVersionUID = -2170897015344177815L;
+
+		private static final long serialVersionUID = -6557418369391430597L;
 
 		@Id
 	  	@Column(name = "ID")
@@ -30,5 +38,9 @@ public class VentaEntity implements Serializable{
 	  	@NotNull(message = "Fecha es requerido")
 	  	@Column(name = "FECHA")
 		private String fecha;
- 
+	  	
+	  /*private ClienteDTO cliente;
+	  	private ArrayList<VentaDetalleDTO> ventaItems;
+	   */
+	  	
 }

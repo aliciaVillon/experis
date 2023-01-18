@@ -1,4 +1,4 @@
-package com.experis.ventaapp.rest;
+package com.experis.ventaapp.rest.util;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

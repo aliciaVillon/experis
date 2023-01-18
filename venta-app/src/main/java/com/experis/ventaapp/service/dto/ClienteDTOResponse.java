@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClienteDTOResponse {
-	private com.experis.ventaapp.rest.Message 	message;
+	private com.experis.ventaapp.rest.util.Message 	message;
 	private ClienteDTO 	data;
 }

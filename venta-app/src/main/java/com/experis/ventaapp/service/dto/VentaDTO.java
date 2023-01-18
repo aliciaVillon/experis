@@ -1,11 +1,7 @@
 package com.experis.ventaapp.service.dto;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-
+import java.util.List;
+ 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,8 +18,9 @@ import lombok.experimental.SuperBuilder;
 public class VentaDTO {
   
 	private Long id; 
-	private Long idCliente;
-	//private ClienteDTO cliente;
+	private Long idCliente; 
 	private String fecha;
-	
+/*	private ClienteDTO cliente;
+	private List<VentaDetalleDTO> ventaItems;
+*/	
 }

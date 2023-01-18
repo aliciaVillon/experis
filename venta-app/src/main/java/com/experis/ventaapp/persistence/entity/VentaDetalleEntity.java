@@ -15,8 +15,8 @@ import lombok.Data;
 @Entity
 @Table(name = "detalleVenta")
 public class VentaDetalleEntity implements Serializable{
-		  
-	private static final long serialVersionUID = -2170897015344177815L;
+		   
+		private static final long serialVersionUID = 904202428069814207L;
 
 		@Id
 	  	@Column(name = "ID")
