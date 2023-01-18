@@ -31,6 +31,7 @@ public class ClienteEntity implements Serializable{
 	  	@Column(name = "APELLIDOS")
 	  	private String apellidos;
 	  	
+	  	@NotNull(message = "DNI del cliente es requerido") 
 	  	@Column(name = "DNI")
 	  	private String dni;
 

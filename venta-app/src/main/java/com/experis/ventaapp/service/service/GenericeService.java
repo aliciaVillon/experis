@@ -13,6 +13,7 @@ public interface GenericeService<T> {
 	
 	T save(T t) throws ServiceException;
 	
-	T update(T t) throws ServiceException;
+	void update(T t,Long id) throws ServiceException;
 
+	void deleteById(Long id) throws ServiceException;
 }

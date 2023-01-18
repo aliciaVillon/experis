@@ -61,10 +61,17 @@ public class ClienteServiceImpl implements ClienteService{
 		return this.getClienteDTO(this.clienteRepository.save(this.getClienteEntity(t)));
 	}
 
+ 
+
 	@Override
-	public ClienteDTO update(ClienteDTO t) throws ServiceException {
+	public void deleteById(Long id) throws ServiceException {
+		// TODO Auto-generated method stub 
+	}
+
+	@Override
+	public void update(ClienteDTO t, Long id) throws ServiceException {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 	
 }

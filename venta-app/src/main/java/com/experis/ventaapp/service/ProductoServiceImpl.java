@@ -1,6 +1,7 @@
 package com.experis.ventaapp.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
@@ -40,8 +41,18 @@ public class ProductoServiceImpl implements ProductoService{
 
 	@Override
 	public Optional<ProductoDTO> findById(Long id) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			//log.info("id "+pedidoDTO.getId());
+			Optional<ProductoEntity> pedidoEntity= this.productoRepository.findById(id);
+			if (pedidoEntity.isPresent()) { 
+
+				 return Optional.of(this.getProductoDTO(pedidoEntity.get()));
+			}
+			//log.info("empty... ");
+			return Optional.empty();
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
 	}
 
 	// Mappers
@@ -55,14 +66,26 @@ public class ProductoServiceImpl implements ProductoService{
 
 	@Override
 	public ProductoDTO save(ProductoDTO t) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getProductoDTO(this.productoRepository.save(this.getProductoEntity(t)));
 	}
 
 	@Override
-	public ProductoDTO update(ProductoDTO t) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+	public void update(ProductoDTO t, Long id) throws ServiceException {
+	    Optional<ProductoEntity> optionalTask = this.productoRepository.findById(id);
+	    if (optionalTask.isEmpty()) {
+	        //throw new ToDoExceptions("Task not found", HttpStatus.NOT_FOUND);
+	    } 
+	    this.productoRepository.save(this.getProductoEntity(t));
 	}
-	
+		
+		 
+
+	@Override
+   public void deleteById(Long id) {
+    Optional<ProductoEntity> optionalTask = this.productoRepository.findById(id);
+    if (optionalTask.isEmpty()) {
+        //throw new ToDoExceptions("Task not found", HttpStatus.NOT_FOUND);
+    } 
+    this.productoRepository.deleteById(id);
+}
 }
