@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: venta-app
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: venta
+    password: 123456
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
