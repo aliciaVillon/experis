@@ -19,11 +19,11 @@ import lombok.experimental.SuperBuilder;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @JsonPropertyOrder(value = {"id","idCliente","fecha"})
-public class VentaDTO extends GenericDTO{
+public class VentaDTO {
   
 	private Long id; 
 	private Long idCliente;
-	private ClienteDTO cliente;
+	//private ClienteDTO cliente;
 	private String fecha;
 	
 }

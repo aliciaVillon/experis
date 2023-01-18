@@ -1,13 +1,16 @@
 package com.experis.ventaapp.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.stream.Collectors; 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import com.experis.ventaapp.persistence.entity.ClienteEntity;
+import org.springframework.web.client.RestTemplate; 
+import com.experis.ventaapp.persistence.entity.ClienteEntity; 
 import com.experis.ventaapp.persistence.repository.ClienteRepository;
 import com.experis.ventaapp.service.dto.ClienteDTO;
+import com.experis.ventaapp.service.dto.ClienteDTOResponse;
 import com.experis.ventaapp.service.exception.ServiceException;
 import com.experis.ventaapp.service.service.ClienteService;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -17,6 +20,8 @@ public class ClienteServiceImpl implements ClienteService{
  
 	private ClienteRepository clienteRepository;
 	private JsonMapper jsonMapper;
+	private RestTemplate 	restTemplate;
+	
 	
 	public ClienteServiceImpl(	ClienteRepository clienteRepository,
 								JsonMapper jsonMapper
@@ -40,11 +45,18 @@ public class ClienteServiceImpl implements ClienteService{
 
 	@Override
 	public Optional<ClienteDTO> findById(Long id) throws ServiceException {
-		Optional<ClienteEntity> optClienteEntity=  clienteRepository.findById(id);
-		if(optClienteEntity.isPresent()) {
-			return Optional.of(this.getClienteDTO(optClienteEntity.get()));
+		try {
+			//log.info("id "+pedidoDTO.getId());
+			Optional<ClienteEntity> rClienteEntity= this.clienteRepository.findById(id);
+			if (rClienteEntity.isPresent()) { 
+
+				 return Optional.of(this.getClienteDTO(rClienteEntity.get()));
+			}
+			//log.info("empty... ");
+			return Optional.empty();
+		} catch (Exception e) {
+			throw new ServiceException(e);
 		}
-		return null;
 	}
 
 	// Mappers
@@ -73,5 +85,41 @@ public class ClienteServiceImpl implements ClienteService{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public Optional<ClienteDTO> findByIdObject(ClienteDTO t) throws ServiceException {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
+
+	@Override
+	public ClienteDTO findByIdCliente(Long id) { 
+			
+			// Plan A
+			ResponseEntity<ClienteDTOResponse> rEClienteDTO=restTemplate.getForEntity("/cliente/"+id, ClienteDTOResponse.class);
+			
+			if (!Objects.isNull(rEClienteDTO)) {
+				return rEClienteDTO.getBody().getData();
+			}
+			return getClienteDTO();  
+	}
 	
+	private ClienteDTO getClienteDTO() {
+		return ClienteDTO.
+					builder().
+					id(0L)
+					.nombres("Cliente por definir")
+					.apellidos("")
+					.build();
+		// Plan B
+		/*
+		return circuitBreaker.run(() -> {
+					
+				// Ok
+			},
+				throwable -> //Error
+				// Plan C
+			);
+		*/
+	}
 }

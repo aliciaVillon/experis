@@ -119,7 +119,7 @@ public class ProductoREST {
 	 
 
 		@PutMapping("/{id}")
-		public ResponseEntity<?> editar(@Valid @RequestBody ProductoDTO  productoDTO, BindingResult result, @PathVariable Long id){
+		public ResponseEntity<?> update(@Valid @RequestBody ProductoDTO  productoDTO, BindingResult result, @PathVariable Long id){
 		 
 			try {
 				Optional<ProductoDTO> rProductoDTO= this.productoService.findById(id);
@@ -130,6 +130,8 @@ public class ProductoREST {
 				ProductoDTO productoDTODb = rProductoDTO.get();
 				productoDTODb.setNombre(productoDTO.getNombre());
 				productoDTODb.setPrecio(productoDTO.getPrecio());
+				productoService.save(productoDTODb);
+				
 			} catch (ServiceException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

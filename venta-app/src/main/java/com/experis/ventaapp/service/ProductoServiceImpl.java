@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.experis.ventaapp.exceptions.ToDoExceptions;
 import com.experis.ventaapp.persistence.entity.ProductoEntity;
 import com.experis.ventaapp.persistence.repository.ProductoRepository;
 import com.experis.ventaapp.service.dto.ProductoDTO;
@@ -73,7 +76,7 @@ public class ProductoServiceImpl implements ProductoService{
 	public void update(ProductoDTO t, Long id) throws ServiceException {
 	    Optional<ProductoEntity> optionalTask = this.productoRepository.findById(id);
 	    if (optionalTask.isEmpty()) {
-	        //throw new ToDoExceptions("Task not found", HttpStatus.NOT_FOUND);
+	        throw new ToDoExceptions("Task not found", HttpStatus.NOT_FOUND);
 	    } 
 	    this.productoRepository.save(this.getProductoEntity(t));
 	}
@@ -88,4 +91,10 @@ public class ProductoServiceImpl implements ProductoService{
     } 
     this.productoRepository.deleteById(id);
 }
+
+	@Override
+	public Optional<ProductoDTO> findByIdObject(ProductoDTO t) throws ServiceException {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
 }
